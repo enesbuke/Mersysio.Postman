@@ -1,5 +1,7 @@
 # Mersysio.Postman
 
+An API-Test written with Postman to test an existing website used by a company called Techno Study.
+
 
 ## Teams 🍵
  * 🍪 _Enes BÜKE_ --  **Team Lead**
