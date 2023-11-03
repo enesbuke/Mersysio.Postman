@@ -1,0 +1,2680 @@
+{
+	"info": {
+		"_postman_id": "a7590581-6e70-4ced-8a9b-b86d9ac8f237",
+		"name": "Campus",
+		"description": "Test.mersys.io API test.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0abcf64a-ba78-4951-9f88-daf0038020f4",
+								"exec": [
+									"pm.test(\"Invalid username or password\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2969a0be-d596-493e-9f58-e1b897fbaa86",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{InvalidUsername}}\",\n    \"password\": \"{{InvalidPassword}}\",\n    \"rememberMe\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "13fb2a4c-789e-49c1-a259-4f0e6c39ab32",
+								"exec": [
+									"pm.test(\"Login successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "10675bb5-7c95-4d53-9525-25ba2b0786e3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{Username}}\",\n    \"password\": \"{{Password}}\",\n    \"rememberMe\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}auth/login"
+					},
+					"response": []
+				}
+			],
+			"id": "eb8e1cb3-6ce3-486f-9c64-c8f2f33256bb",
+			"description": "#Enes BÜKE"
+		},
+		{
+			"name": "Nationality",
+			"item": [
+				{
+					"name": "Nationality List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d190be2-b902-4b02-bd78-5f27aaa35379",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0a3ef466-bf52-457b-9bc5-90ef21b06f81",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{URL}}school-service/api/nationality"
+					},
+					"response": []
+				},
+				{
+					"name": "Nationality Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "49741c6d-7765-405a-9d26-49213cf62e60",
+								"exec": [
+									"IncomingData=pm.response.json();",
+									"pm.collectionVariables.set(\"nationalityId\",IncomingData.id);",
+									"",
+									"pm.collectionVariables.set(\"nationalityname\",IncomingData.name);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "7f309ac5-7789-49e0-a28e-46edc15b960a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"{{$randomUserName}}\",\n\"translateName\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/nationality"
+					},
+					"response": []
+				},
+				{
+					"name": "Nationality Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "accdec9a-2c4d-4871-86fe-c8f6225ff0c8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "d8c8411b-4178-46de-94fa-342a7e42f02a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"{{nationalityname}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/nationality/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Nationality Edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb7c4b44-37f0-4077-9493-20dcfaf23132",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "26b9aa47-3747-491e-abed-cd39dd453445",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":\"{{nationalityId}}\",\n    \"name\":\"{{$randomUserName}}\",\n    \"translateName\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/nationality"
+					},
+					"response": []
+				},
+				{
+					"name": "Nationality Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4eefb14e-0a31-499b-89ec-0608842036cc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "3f9dd58e-13f7-4797-9738-74f280fe2e27",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}school-service/api/nationality/{{nationalityId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Nationality Delete Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06493387-7ca1-45fc-b206-91a2f1f9bb80",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f658b2da-2a99-45be-bf85-d3ec95e5683b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}school-service/api/nationality/{{nationalityId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "5855d48b-934f-45d6-ae49-71633c4dae1a",
+			"description": "#Alperen ŞANLI"
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "Department List Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c41bf63-09a1-4205-b044-0963b799794e",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "bec515cc-7ffa-433b-8b51-e0f4664610c0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Request method 'GET' not supported "
+						},
+						"url": "{{URL}}school-service/api/department"
+					},
+					"response": []
+				},
+				{
+					"name": "Department Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7692144e-49eb-4e86-8d0b-ea880c9e42d0",
+								"exec": [
+									"IncomingData=pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"DepartmentId\",IncomingData.id);",
+									"pm.collectionVariables.set(\"DepartmentName\",IncomingData.name);",
+									"",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "598f4b14-7ff3-4344-8e43-28e3e6d54f1d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deleted\": false,\n     \"name\": \"{{$randomCompanyName}}\",\n    \"code\": \"{{$randomPhoneNumber}}\",\n    \"active\": true,\n    \"school\": \"646cbb07acf2ee0d37c6d984\",\n    \"sections\": [],\n    \"constants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/department"
+					},
+					"response": []
+				},
+				{
+					"name": "Department Search Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "51511c4a-c057-45dc-92e6-6c3c49d963a0",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "050c2f82-1c33-424a-8b72-a4ff4973dffc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"name\": \"{{DepartmentName}}\",\n    \"code\": \"{{DepartmentCode}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/department/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Department Edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1722e147-c3e0-45b9-8be9-8ebae288cc4e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1c0330dd-9772-4bda-8722-4753db513c8c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"id\": \"{{DepartmentId}}\",\n    \"deleted\": false,\n     \"name\": \"{{$randomCompanyName}}\",\n    \"code\": \"{{$randomPhoneNumber}}\",\n    \"active\": true,\n    \"school\": \"646cbb07acf2ee0d37c6d984\",\n    \"sections\": [],\n    \"constants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/department"
+					},
+					"response": []
+				},
+				{
+					"name": "Department Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a5c3746d-7dd8-4710-995e-c86d9f653bd5",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "9663a46d-dc7f-493c-9e22-33415880588d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}school-service/api/department/{{DepartmentId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "7cc2306f-c6be-4d95-98b4-a114e6edcdf7",
+			"description": "#Alperen ŞANLI"
+		},
+		{
+			"name": "Position Categories",
+			"item": [
+				{
+					"name": "Position categories List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "affcd5b6-1bc0-4927-846f-19dcb0553fce",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f959915b-75e7-477e-abd4-40009b7c7f04",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/position-category"
+					},
+					"response": []
+				},
+				{
+					"name": "Position categories Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a48b1e64-450a-46a0-b5be-f96e43415782",
+								"exec": [
+									"IncomingData=pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"positionCategoriesId\",IncomingData.id);",
+									"pm.collectionVariables.set(\"positionCategoriesName\",IncomingData.name);",
+									"",
+									"",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f01bc0e2-5489-4723-9588-6691dec37f65",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"name\": \"{{$randomUserName}}\",\n    \"translateName\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/position-category"
+					},
+					"response": []
+				},
+				{
+					"name": "Position categories Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac2b9c5f-9a06-47e7-9db0-340245b20224",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "7137b886-91af-44d7-b160-5832c72149a2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n \"name\":\"{{positionCategoriesName}}\"\n     \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/position-category/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Position categories Edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2ae3aa8-386f-411c-b760-d33611fa3be3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "10e9ac6e-e5ee-4049-8c56-8b386792f442",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":\"{{positionCategoriesId}}\",\n\"name\":\"{{$randomUserName}}\",\n\"translateName\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/position-category"
+					},
+					"response": []
+				},
+				{
+					"name": "Position categories Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71b463b1-b922-4d93-bfb9-75d1645d0282",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "9d87a199-1703-437d-a023-4719437c2774",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/position-category/{{positionCategoriesId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Position categories Delete Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71b463b1-b922-4d93-bfb9-75d1645d0282",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "386dad68-4985-445b-8928-8884de0c0adf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/position-category/{{positionCategoriesId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "f424cff7-28c9-4450-bd61-8ef02e18e01e",
+			"description": "#Alperen ŞANLI"
+		},
+		{
+			"name": "Document Type",
+			"item": [
+				{
+					"name": "Document Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f76341fd-66ea-4abb-9f24-5791c3b32e47",
+								"exec": [
+									"pm.test(\"Document Type has been listed successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2c084e4d-f6cf-477f-8014-8ae7bdda2a2c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookies",
+								"value": "access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODc3NTgxOCwiaWF0IjoxNjk4Nzc1NTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiI3QVBjQ1hzZWJUMHA5RC1kTTlmZ1IwRkg1aEkiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.BcMPJbTABcu5bJCqSmGXlC6Wx26Gel5dSQiPwSLZKIckSHkeEKngThYF7_RwfXxAzKwc0U8oA0Vdq0Bq-w9m0P8cuIPASyFRb6Rtf0rXZutbbcHDwm-A5PqpzxD-ThmfncVEdmqPyk5G9ZCnUS-inYdVeMN34m4CdYQcpPDIVn1Rsfp_WxhY7jV64qtVOXI223K34vNNpGGdtwAN5te4io7Mil71q6Q9vzBqqnGvTGDUORF6ayL8GCsrZBNiiKoS1XY-dhxKE3_k-in9pGDr0GnRPeqyrBWz2znOVqnCCDN6aIqTK6mXuk2uMReXtUR0fiA6vYiuqywSr9DEsL-Trw; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImF0aSI6IjdBUGNDWHNlYlQwcDlELWRNOWZnUjBGSDVoSSIsImV4cCI6MTY5OTM4MDMxOCwiaWF0IjoxNjk4Nzc1NTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiJ4SmVDVmNENUR3dk9XREVpX3ZQbS1RWmY2Y0UiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.kEmTpvZfeCMpufjPub6jVypEXZXy8UcWk6APQQrxqI87sdbP6jGXfcqq0_1Rldk5Nn-c57beEctAHrK5rIn-b6dNqZ1JDeaRjISiiGEJHVershDPauc960tb0QFf4dG18KaxvTlmu4oru7H8QzWmColDmyV2cIFFsHODl9gwQLt9-hcGWE8NuVTvSURgbG60Z-a9EXzMQI9V9ZvvlMy3nhyDrx0GeUswc8eYvAbj3tA88Vocmi3pfTt4FKrMdoJAPJWZehxcA3fNkMf6SD48UD2uThKlNvUPPlJzEpDxqr0vl3NKx7ZEua4RmYNBKLWflqzDeDgLPmIKrC9HM5Am5g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attachments/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Document Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3e048b4-3f0b-4b48-ac64-cdd232a5d17b",
+								"exec": [
+									"",
+									"var incmnData = pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"id\",incmnData.id)",
+									"",
+									"",
+									"",
+									"pm.test(\"A document type successfully created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f96d5364-718d-45c2-812a-0ab0466a9f0a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"name\": \"Eavess\",\n  \"description\": \"Description \",\n  \"attachmentStages\": [\n    \"STUDENT_REGISTRATION\"\n  ],\n  \"active\": true,\n  \"required\": true,\n  \"useCamera\": false,\n  \"translateName\": [],\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attachments/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Document Type Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3e048b4-3f0b-4b48-ac64-cdd232a5d17b",
+								"exec": [
+									"",
+									"pm.test(\"Method argument not valid\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f199464a-27ec-4468-aa17-06818aa15042",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"name\": null,\n  \"description\": \"Description \",\n  \"attachmentStages\": [\n    \"STUDENT_REGISTRATION\"\n  ],\n  \"active\": true,\n  \"required\": true,\n  \"useCamera\": false,\n  \"translateName\": [],\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attachments/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Document Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d69eb5d-7679-4113-bd27-aa0e272d9aa3",
+								"exec": [
+									"pm.test(\"Document type successfully edited\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "c9c5631c-53f7-4656-8eca-14cb9cebf692",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{id}}\",\n  \"name\": \"Eavess1\",\n  \"description\": \"Description \",\n  \"attachmentStages\": [\n    \"STUDENT_REGISTRATION\"\n  ],\n  \"active\": true,\n  \"required\": true,\n  \"useCamera\": false,\n  \"translateName\": [],\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attachments"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Document Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8377824e-f03b-4f20-9650-8da77dcb392e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "c5bef7cb-7657-4c69-9f35-f59264bba410",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/attachments/{{id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Document Type Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8377824e-f03b-4f20-9650-8da77dcb392e",
+								"exec": [
+									"pm.test(\"Attachment Type not found\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0ba87c15-99d4-4510-8878-a8d1fdf144ae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/attachments/{{id}}"
+					},
+					"response": []
+				}
+			],
+			"id": "da2a7658-f699-4cb3-9f11-21b984c1ea0b",
+			"description": "#Enes BÜKE"
+		},
+		{
+			"name": "Subject Categories",
+			"item": [
+				{
+					"name": "Subject Categories List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f76341fd-66ea-4abb-9f24-5791c3b32e47",
+								"exec": [
+									"pm.test(\"Document Type has been listed successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "27ff16d8-c298-4136-ae6c-3ddc2d5cf096",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookies",
+								"value": "access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODc3NTgxOCwiaWF0IjoxNjk4Nzc1NTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiI3QVBjQ1hzZWJUMHA5RC1kTTlmZ1IwRkg1aEkiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.BcMPJbTABcu5bJCqSmGXlC6Wx26Gel5dSQiPwSLZKIckSHkeEKngThYF7_RwfXxAzKwc0U8oA0Vdq0Bq-w9m0P8cuIPASyFRb6Rtf0rXZutbbcHDwm-A5PqpzxD-ThmfncVEdmqPyk5G9ZCnUS-inYdVeMN34m4CdYQcpPDIVn1Rsfp_WxhY7jV64qtVOXI223K34vNNpGGdtwAN5te4io7Mil71q6Q9vzBqqnGvTGDUORF6ayL8GCsrZBNiiKoS1XY-dhxKE3_k-in9pGDr0GnRPeqyrBWz2znOVqnCCDN6aIqTK6mXuk2uMReXtUR0fiA6vYiuqywSr9DEsL-Trw; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImF0aSI6IjdBUGNDWHNlYlQwcDlELWRNOWZnUjBGSDVoSSIsImV4cCI6MTY5OTM4MDMxOCwiaWF0IjoxNjk4Nzc1NTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiJ4SmVDVmNENUR3dk9XREVpX3ZQbS1RWmY2Y0UiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.kEmTpvZfeCMpufjPub6jVypEXZXy8UcWk6APQQrxqI87sdbP6jGXfcqq0_1Rldk5Nn-c57beEctAHrK5rIn-b6dNqZ1JDeaRjISiiGEJHVershDPauc960tb0QFf4dG18KaxvTlmu4oru7H8QzWmColDmyV2cIFFsHODl9gwQLt9-hcGWE8NuVTvSURgbG60Z-a9EXzMQI9V9ZvvlMy3nhyDrx0GeUswc8eYvAbj3tA88Vocmi3pfTt4FKrMdoJAPJWZehxcA3fNkMf6SD48UD2uThKlNvUPPlJzEpDxqr0vl3NKx7ZEua4RmYNBKLWflqzDeDgLPmIKrC9HM5Am5g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/subject-categories/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Subject Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3e048b4-3f0b-4b48-ac64-cdd232a5d17b",
+								"exec": [
+									"",
+									"var incmnData = pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"id\",incmnData.id)",
+									"",
+									"",
+									"",
+									"pm.test(\"A document type successfully created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "38000b2e-6e45-49f5-a9e9-c6de0492bb11",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"Eavess1 \",\n    \"code\": \"1283\",\n    \"active\": true,\n    \"translateName\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/subject-categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Subject Category Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f3e048b4-3f0b-4b48-ac64-cdd232a5d17b",
+								"exec": [
+									"",
+									"pm.test(\"The Subject Category with Code already exists.\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "76404b39-c61d-49ba-aa59-70815d3f84c0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"Eavess1 \",\n    \"code\": \"1283\",\n    \"active\": true,\n    \"translateName\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/subject-categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Subject Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d69eb5d-7679-4113-bd27-aa0e272d9aa3",
+								"exec": [
+									"pm.test(\"Document type successfully edited\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "8a183451-e5d9-427f-90d5-625a5c76fd80",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{id}}\",\n  \"name\": \"awesEavess \",\n  \"code\": \"1283\",\n  \"active\": true,\n  \"translateName\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/subject-categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subject Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8377824e-f03b-4f20-9650-8da77dcb392e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1994feaf-d2c4-4dac-8b26-b0b2870686dd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/subject-categories/{{id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subject Category Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8377824e-f03b-4f20-9650-8da77dcb392e",
+								"exec": [
+									"pm.test(\"Attachment Type not found\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f5541dc6-0bd1-4761-bc27-9965738ef134",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/subject-categories/{{id}}"
+					},
+					"response": []
+				}
+			],
+			"id": "9a610b12-35b9-41c8-a7e6-1c8ca05668a8",
+			"description": "#Enes BÜKE"
+		},
+		{
+			"name": "Grade Levels",
+			"item": [
+				{
+					"name": "GradeLevel List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29d50b71-19d4-47df-a0d7-52c1bc126268",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "161e9528-144f-4028-ad80-372d42150c40",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels/school/646cbb07acf2ee0d37c6d984"
+					},
+					"response": []
+				},
+				{
+					"name": "Create GradeLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29d50b71-19d4-47df-a0d7-52c1bc126268",
+								"exec": [
+									"var gelenData=pm.response.json();",
+									"pm.collectionVariables.set(\"FullName\",gelenData.name);",
+									"pm.collectionVariables.set(\"FullNameID\",gelenData.id);",
+									"",
+									"pm.test(\"A new GradeLevel has been created.\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "4e4fa302-9f06-4bce-bb09-e69f97f15f90",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{$randomFullName}}\",\n    \"shortName\": \"{{$randomInt}}\",\n    \"nextGradeLevel\": null,\n    \"order\": \"2\",\n    \"translateName\": [],\n    \"translateShortName\": [],\n    \"maxApplicationCount\": 0,\n    \"active\": true,\n    \"schoolIds\": [\n        \"646cbb07acf2ee0d37c6d984\"\n    ],\n    \"showToAllSchools\": false,\n    \"enableForSelectedSchools\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels"
+					},
+					"response": []
+				},
+				{
+					"name": "Create GradeLevel Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b921cf02-1cf8-4850-acac-822fe36a2d64",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "98eec890-6c01-4d12-a4c8-8e67bdee28b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{FullName}}\",\n    \"shortName\": \"{{$randomInt}}\",\n    \"nextGradeLevel\": null,\n    \"order\": \"2\",\n    \"translateName\": [],\n    \"translateShortName\": [],\n    \"maxApplicationCount\": 0,\n    \"active\": true,\n    \"schoolIds\": [\n        \"646cbb07acf2ee0d37c6d984\"\n    ],\n    \"showToAllSchools\": false,\n    \"enableForSelectedSchools\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels"
+					},
+					"response": []
+				},
+				{
+					"name": "Update GradeLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bc9ea3e0-5ca4-4d26-a5d7-771a36c62f82",
+								"exec": [
+									"pm.test(\"The GradeLevel has been updated.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "798c1313-3002-4990-ae8a-a07282d369ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{FullNameID}}\",\n    \"name\": \"Update- {{$randomInt}}\",\n    \"shortName\": \"Team8\",\n    \"nextGradeLevel\": null,\n    \"order\": \"2\",\n    \"translateName\": [],\n    \"translateShortName\": [],\n    \"maxApplicationCount\": 0,\n    \"active\": true,\n    \"schoolIds\": [\n        \"646cbb07acf2ee0d37c6d984\"\n    ],\n    \"showToAllSchools\": false,\n    \"enableForSelectedSchools\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete GradeLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "81683e13-1829-4eab-982d-474b39180ac6",
+								"exec": [
+									"",
+									"pm.test(\"The GradeLevel has been successfully deleted\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "8c850a1b-b7a4-4d3d-90c2-be097197186b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels/{{FullNameID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete GradeLevel Copyegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "81683e13-1829-4eab-982d-474b39180ac6",
+								"exec": [
+									"pm.test(\"The GradeLevel could not be found as it has been deleted\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f62728f7-63ed-43b0-b4a9-549ca2562ac8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/grade-levels/{{FullNameID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "d82544b0-a39b-403e-aad0-675268bc4b3d",
+			"description": "#Sinem YURDUSEVER"
+		},
+		{
+			"name": "HR_Position",
+			"item": [
+				{
+					"name": "Create Position",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c329fa1-6ce1-464d-88c0-fa3234705f50",
+								"exec": [
+									"var gelenData=pm.response.json();",
+									"pm.collectionVariables.set(\"FullName\",gelenData.name);",
+									"pm.collectionVariables.set(\"FullNameID\",gelenData.id);",
+									"",
+									"pm.test(\"A new position has been created.\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "561ac130-21b3-4785-ab21-31ed6fd0bc39",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{$randomFullName}} - {{$randomInt}}\",\n    \"shortName\": \"8\",\n    \"translateName\": [],\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n    \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Position Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c329fa1-6ce1-464d-88c0-fa3234705f50",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "3c5a8935-8a43-43d9-b7cd-a01cb579c073",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{FullName}}\",\n    \"shortName\": \"12\",\n    \"translateName\": [],\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n    \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position"
+					},
+					"response": []
+				},
+				{
+					"name": "HR_Position Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f231e349-c2b9-4b9f-9114-bcb33fde7e33",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "091dfccf-8a34-48c0-870a-93be533bb122",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Position",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
+								"exec": [
+									"pm.test(\"The position has been updated.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "44c6c3a9-6bb4-444f-bb1f-796d6e680b3b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{FullNameID}}\",\n  \"name\": \"Update - {{$randomInt}}\",\n  \"shortName\": \"8\",\n  \"translateName\": [],\n  \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n  \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Position",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
+								"exec": [
+									"pm.test(\"The position has been successfully deleted\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "89848707-2a7d-4a26-bba3-1ba5ab44bd0f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position/{{FullNameID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Position Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
+								"exec": [
+									"pm.test(\"it has not been deleted\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "a026d2ec-e82a-4ad2-b4db-a01b680aef2d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/employee-position/{{FullNameID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "0c4d9a24-4db0-4202-bc72-f74c64449cab",
+			"description": "#Sinem YURDUSEVER"
+		},
+		{
+			"name": "SchoolSetupLocation",
+			"item": [
+				{
+					"name": "Create SchoolSetup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55020af5-60b8-4a36-ba80-fd312854fae8",
+								"exec": [
+									"var gelenData=pm.response.json();",
+									"pm.collectionVariables.set(\"FullName\",gelenData.name);",
+									"pm.collectionVariables.set(\"FullNameID\",gelenData.id);",
+									"",
+									"pm.test(\"A new SchoolSetup has been created.\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "4752e153-010c-403d-937f-125b14bc8367",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{$randomFullName}} - {{$randomInt}}\",\n    \"shortName\": \"8\",\n    \"active\": true,\n    \"capacity\": 10,\n    \"type\": \"CLASS\",\n    \"school\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/location"
+					},
+					"response": []
+				},
+				{
+					"name": "Create SchoolSetup Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55020af5-60b8-4a36-ba80-fd312854fae8",
+								"exec": [
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "cc1d0397-b5ec-493e-8f48-aca8974dc5d5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"name\": \"{{FullName}}\",\n    \"shortName\": \"8\",\n    \"active\": true,\n    \"capacity\": 10,\n    \"type\": \"CLASS\",\n    \"school\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/location"
+					},
+					"response": []
+				},
+				{
+					"name": "Update SchoolSetup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cb4ea383-d5f0-4bd5-92cb-478fefa8a5a0",
+								"exec": [
+									"pm.test(\"The new SchoolSetup was successfully updated.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ac1bad24-4c37-4ddf-9aed-edfa16f29d11",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{FullNameID}}\",\n    \"name\": \"Update - {{$randomInt}}\",\n    \"shortName\": \"8\",\n    \"active\": true,\n    \"capacity\": 10,\n    \"type\": \"CLASS\",\n    \"school\": \"646cbb07acf2ee0d37c6d984\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/location"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SchoolSetup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11fc906b-d0c5-453c-ab3e-b2b4eef7e572",
+								"exec": [
+									"pm.test(\"The SchoolSetup has been successfully deleted\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "075ef6f2-6d3c-4dfb-9ff9-c44c372ca4ea",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/location/{{FullNameID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SchoolSetup Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11fc906b-d0c5-453c-ab3e-b2b4eef7e572",
+								"exec": [
+									"pm.test(\"The SchoolSetup could not be found as it has been deleted\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "6be9b761-a7f0-4066-9310-f4485a541a2c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}school-service/api/location/{{FullNameID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "14688fb2-e087-4d07-a317-31d006039b17",
+			"description": "#Sinem YURDUSEVER"
+		},
+		{
+			"name": "Attestions",
+			"item": [
+				{
+					"name": "Attestions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac35b2f0-c9c7-42e7-843c-a02044e9efb5",
+								"exec": [
+									"var gelenData=pm.response.json();\r",
+									"pm.collectionVariables.set(\"AttestionsID\", gelenData.id); \r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "c48b75db-ba63-48e2-976e-48352ad78d14",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attestation"
+					},
+					"response": []
+				},
+				{
+					"name": "Attestions Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3e6cd15-10f8-47ee-a801-02a06fd86bad",
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "9af6a24d-23b6-4aea-844a-79d539191aa8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{AttestionsID}},\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attestation"
+					},
+					"response": []
+				},
+				{
+					"name": "Attestions Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fadf486e-bdbe-4e67-8d9a-782163b2b497",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2e01e684-0e50-49dc-ba94-b5be5afac4f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{AttestionsID}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attestation"
+					},
+					"response": []
+				},
+				{
+					"name": "Attestions Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7f97253f-f180-4fae-af01-65d78dffbfb9",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "769c3b22-2fd7-43a3-9594-1aeb3adb35b1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "ebd478242112c0059ef2abd9055aaa5368e6f1b08f0a8539b0f4cfbc3c9e5b57"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attestation/{{AttestionsID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Attestions Delete Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a3c6249-f3d0-494a-a95d-265a269ae360",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2d5a5b0e-a38d-46be-802a-5c4dcc72107b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "ebd478242112c0059ef2abd9055aaa5368e6f1b08f0a8539b0f4cfbc3c9e5b57"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/attestation/{{AttestionsID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "e09efe87-ed7b-434f-bee0-3402029837ec"
+		},
+		{
+			"name": "Bank Accounts",
+			"item": [
+				{
+					"name": "Bank Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f07f2f8-f048-404a-a751-22f6e9c7b2b6",
+								"exec": [
+									"var gelenData=pm.response.json();\r",
+									"pm.collectionVariables.set(\"BankAccountsID\", gelenData.id); \r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "8a800122-4b3a-43b2-9a15-5e3eb06e8caf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"iban\": \"{{$randomInt}}\",\r\n  \"integrationCode\": \"{{$randomFullName}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/bank-accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Accounts Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "605ff19f-69cf-46cd-bd66-2b52283ee119",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "cc12d5fd-a12a-4838-8c6a-2092b82bf525",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{BankAccountsID}},\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"iban\": \"{{$randomInt}}\",\r\n  \"integrationCode\": \"{{$randomFullName}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/bank-accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Accounts Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44f6cee8-0fe2-45f2-806c-134ef5ff27b6",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ee9a0403-59af-4433-b2a1-6b3d490d33e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":\"{{BankAccountsID}}\",\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"iban\": \"{{$randomInt}}\",\r\n  \"integrationCode\": \"{{$randomFullName}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/bank-accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Accounts Update Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c7a0cf7e-0280-4b9b-a1aa-6cb4682cc418",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5c3885df-26c2-46bf-94ac-3cf2455716ed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/bank-accounts/{{BankAccountsID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Accounts Update Delete Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b5ac990a-3f31-4f0e-a468-ad6832b31a64",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0804d8a1-3c0a-4e03-b4e4-ed35ec5461e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "aed5e74f0ae04dddc860be40370cc32127e19795f8c207de4ff3b78ed4f3182a"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/bank-accounts/{{BankAccountsID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "5837a500-ff3e-4a95-92cd-dc0cdd8e114b"
+		},
+		{
+			"name": "Fields",
+			"item": [
+				{
+					"name": "Campus Field List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "58a7c6a2-9753-4148-885b-d4d6c5808e30",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "f0a526b2-df47-4764-9be0-7932b3b62fdd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/entity-field/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8aa45141-970e-4f8e-9511-0f6ae822973d",
+								"exec": [
+									"\r",
+									"var incomingData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"FullName\", incomingData.name);\r",
+									"pm.collectionVariables.set(\"FullNameID\", incomingData.id);\r",
+									"\r",
+									"pm.test(\"The field was successfully created\",function(){\r",
+									"pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "00134d44-2ce0-4ff0-8a06-963003365990",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomFullName}}    {{$randomInt}}\",\r\n  \"translateName\": [],\r\n  \"code\": \"5\",\r\n  \"type\": \"STRING\",\r\n  \"children\": [],\r\n  \"systemField\": false,\r\n  \"systemFieldName\": null,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/entity-field"
+					},
+					"response": []
+				},
+				{
+					"name": "Fields Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce502ca5-5ac3-4f9e-96a8-f2a056fb6824",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "03509544-04e0-492c-bc97-6e18026e5432",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schoolId\": \"{{FullNameID}}\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/entity-field/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6705184-adcc-4617-b1d6-f7e938ca2c09",
+								"exec": [
+									"pm.test(\"Field edited\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1b958cf8-2e41-420e-bca5-acf87364a9b4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{FullNameID}}\",\r\n  \"name\": \"burak Update   {{$randomInt}}\",\r\n  \"translateName\": [],\r\n  \"code\": \"5\",\r\n  \"type\": \"STRING\",\r\n  \"children\": [],\r\n  \"systemField\": false,\r\n  \"systemFieldName\": null,\r\n  \"schoolId\": \"646cbb07acf2ee0d37c6d984\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/entity-field"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5793fd8e-5881-4a01-a86a-760de2c97a49",
+								"exec": [
+									"pm.test(\"Field successfully deleted\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "a3fbdae3-1918-4e42-9622-37630ff8619c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}school-service/api/entity-field/{{FullNameID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "3d43124c-65ef-44f4-a05b-73173c27aee9"
+		},
+		{
+			"name": "Discount",
+			"item": [
+				{
+					"name": "Campus Discount List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac65090e-55f9-4313-96e0-c96f9816009f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									" pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2f69d757-5941-49fa-a4fb-fbdad1f69fc6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODkwMjY4OCwiaWF0IjoxNjk4OTAyMzg4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiIzWUlPM2dJY3VwTWhtcy1aS0tjS0FhYWxfRFUiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.QV9ur5Z0-dpcKNVieGmBRjZx2OMqIZqEMbV4I6hVDYT2mZ1XIyQvBvJBcs6WqwIr_4Ipm0q9Z4yn6QEd8Ip2Tdaf0dtJ5koMyX8ip7LcVhkVP0cvsxvByW-TEdPt1zNeH3RACm1Yz2a_LwNrR1xIwwHwNv_h7BrAhukHuvyJf3GL4rhA2UeszpP9iC5e7BgxY6R1VKTPF5pL9TI6UbxvmSJxVmnWn3WGS8R7ZIOuj2Q534y9hBT4FM9f3QkqouzWNwHtecTo47g0XUpOssUMiDXClFHS77uosnpcmjHoccdCk7PSMgUoz3TEVrS9rN0da4_72Vtmk9hQ0Zy-wjy0-Q; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImF0aSI6IjNZSU8zZ0ljdXBNaG1zLVpLS2NLQWFhbF9EVSIsImV4cCI6MTY5OTUwNzE4OCwiaWF0IjoxNjk4OTAyMzg4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiJ6YXE2M2RoTzIzRHZPZWh5cHhuaFRROUs5MWsiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.XO71I9qo81PzXSQx3uEM0dUETqI-S5H282xTONYCaW-kzFV4Y8heJs5-FKtLPDmgm2Xgz1u77Kvd-jxePwXv9eqKJMSUaELFLE-5UvO72m1R_7_rkKbTAi5JtmuLhh6LnaO9Fgjg8YklpLVabPmJd4Z5KyUbyJ_TFe-cmXXanob4V6vQir6pd4dei7N3sNmjs_Ni3Fuc8rdxqueLfR8pBYduqZ7H8XIDSOyLK8D1g-Uip3IENImyRV2p_PQ3dERM7-0KSXWUQnE9nSfoMq4EmiBr1pL35ZWOKTG9lQBH01Z9KeqAQ-M4QmYn3ugil-4UsHJFFwo4ownrSLjhbRpuMw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/discounts/search"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Discount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "244cb759-2491-40d8-a065-3646fc1bf9d6",
+								"exec": [
+									"\r",
+									"var incomingData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"Discount_id\", incomingData.id);\r",
+									" \r",
+									"pm.test(\"Discount successfully created\", function () {\r",
+									" pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "47804600-f83d-4cdf-a542-6ff98161c7b2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"description\": \"study2\",\r\n    \"code\": \"2\",\r\n    \"active\": true,\r\n    \"translateDescription\": [],\r\n    \"priority\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/discounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Discount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "da8634d4-0dd8-451d-9677-4a3a3809c396",
+								"exec": [
+									"pm.test(\"The discount was successfully edited\", function () {\r",
+									"pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0a056550-0b29-48c5-9744-3b33d6c94e5b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{Discount_id}}\",\r\n  \"description\": \"study3\",\r\n  \"code\": \"2\",\r\n  \"active\": true,\r\n  \"translateDescription\": [],\r\n  \"priority\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}school-service/api/discounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f4be287-43f0-469a-b95d-0e4db1e65ceb",
+								"exec": [
+									"pm.test(\"Discount successfully deleted\", function () {\r",
+									"pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "50c8c7e7-0d16-4325-953f-4520e6bb1757",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}school-service/api/discounts/{{Discount_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Campus Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c28876f-d090-4ec7-b382-655a2f0d2166",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "44cfc82d-dfab-452d-88b3-f67294747dd1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{URL}}auth/logout"
+					},
+					"response": []
+				}
+			],
+			"id": "54f8b753-2d7c-410d-a66a-8f63ac20476b"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d7bb4597-b227-42b3-b306-f50ee3871c2d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4cce9674-30c9-4c7d-89bd-a8da84b2342b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://test.mersys.io/",
+			"type": "string"
+		},
+		{
+			"key": "nationalityId",
+			"value": ""
+		},
+		{
+			"key": "nationalityname",
+			"value": ""
+		},
+		{
+			"key": "DepartmentId",
+			"value": ""
+		},
+		{
+			"key": "DepartmentName",
+			"value": ""
+		},
+		{
+			"key": "positionCategoriesId",
+			"value": ""
+		},
+		{
+			"key": "positionCategoriesName",
+			"value": ""
+		},
+		{
+			"key": "documentId",
+			"value": ""
+		},
+		{
+			"key": "FullName",
+			"value": ""
+		},
+		{
+			"key": "FullNameID",
+			"value": ""
+		},
+		{
+			"key": "Positions_id",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "AttestionsID",
+			"value": ""
+		},
+		{
+			"key": "BankAccountsID",
+			"value": ""
+		},
+		{
+			"key": "Discount_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
