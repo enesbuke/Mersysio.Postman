@@ -1,0 +1,18 @@
+# Mersysio.Postman
+
+
+## Teams 🍵
+ * 🍪 _Enes BÜKE_ --  **Team Lead**
+ * 🍪 _Alperen ŞANLI_ --  **Tester**
+ * 🍪 _Sinem YURDUSEVER_ -- **Tester**
+ * 🍪 _Fatih GÜVENÇ_ -- **Tester**
+ * 🍪 _Burak Öztürk_ -- **Tester**
+ * 🍪 _Yigithan Düzgün_ -- **Tester**
+
+
+## Communication 📫
+ - 📬 enes.buke12@gmail.com
+
+## **Lisence**  📎
+
+_This project is open-sourced software licensed under the_ [MIT license.](Lisence.md)
