@@ -1,6 +1,6 @@
 # Mersysio.Postman
 
-An API-Test written with Postman to test an existing website used by a company called Techno Study.
+* An API-Test written with Postman to test an existing website used by a company called Techno Study.
 
 
 ## Teams 🍵
