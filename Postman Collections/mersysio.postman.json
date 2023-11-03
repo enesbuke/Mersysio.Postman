@@ -1356,234 +1356,6 @@
 			"description": "#Sinem YURDUSEVER"
 		},
 		{
-			"name": "HR_Position",
-			"item": [
-				{
-					"name": "Create Position",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "7c329fa1-6ce1-464d-88c0-fa3234705f50",
-								"exec": [
-									"var gelenData=pm.response.json();",
-									"pm.collectionVariables.set(\"FullName\",gelenData.name);",
-									"pm.collectionVariables.set(\"FullNameID\",gelenData.id);",
-									"",
-									"pm.test(\"A new position has been created.\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "561ac130-21b3-4785-ab21-31ed6fd0bc39",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": null,\n    \"name\": \"{{$randomFullName}} - {{$randomInt}}\",\n    \"shortName\": \"8\",\n    \"translateName\": [],\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n    \"active\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position"
-					},
-					"response": []
-				},
-				{
-					"name": "Create Position Negative",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "7c329fa1-6ce1-464d-88c0-fa3234705f50",
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "3c5a8935-8a43-43d9-b7cd-a01cb579c073",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": null,\n    \"name\": \"{{FullName}}\",\n    \"shortName\": \"12\",\n    \"translateName\": [],\n    \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n    \"active\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position"
-					},
-					"response": []
-				},
-				{
-					"name": "HR_Position Search",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "f231e349-c2b9-4b9f-9114-bcb33fde7e33",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "091dfccf-8a34-48c0-870a-93be533bb122",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position/search"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Position",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
-								"exec": [
-									"pm.test(\"The position has been updated.\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "44c6c3a9-6bb4-444f-bb1f-796d6e680b3b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"id\": \"{{FullNameID}}\",\n  \"name\": \"Update - {{$randomInt}}\",\n  \"shortName\": \"8\",\n  \"translateName\": [],\n  \"tenantId\": \"646cb816433c0f46e7d44cb0\",\n  \"active\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Position",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
-								"exec": [
-									"pm.test(\"The position has been successfully deleted\", function () {",
-									"    pm.response.to.have.status(204);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "89848707-2a7d-4a26-bba3-1ba5ab44bd0f",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position/{{FullNameID}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Position Negative",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "a0ce47a8-ff2c-4ad9-bf7f-604c2d606595",
-								"exec": [
-									"pm.test(\"it has not been deleted\", function () {",
-									"    pm.response.to.have.status(204);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "a026d2ec-e82a-4ad2-b4db-a01b680aef2d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{URL}}school-service/api/employee-position/{{FullNameID}}"
-					},
-					"response": []
-				}
-			],
-			"id": "0c4d9a24-4db0-4202-bc72-f74c64449cab",
-			"description": "#Sinem YURDUSEVER"
-		},
-		{
 			"name": "SchoolSetupLocation",
 			"item": [
 				{
@@ -2402,7 +2174,8 @@
 					"response": []
 				}
 			],
-			"id": "3d43124c-65ef-44f4-a05b-73173c27aee9"
+			"id": "3d43124c-65ef-44f4-a05b-73173c27aee9",
+			"description": "#Burak ÖZTÜRK"
 		},
 		{
 			"name": "Discount",
@@ -2588,7 +2361,167 @@
 					"response": []
 				}
 			],
-			"id": "54f8b753-2d7c-410d-a66a-8f63ac20476b"
+			"id": "54f8b753-2d7c-410d-a66a-8f63ac20476b",
+			"description": "#Burak ÖZTÜRK"
+		},
+		{
+			"name": "HumanResources",
+			"item": [
+				{
+					"name": "CreatePositionCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var allData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"positionCategoryId\", allData.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Position Category name created correctly\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"HR\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "9b9fa95b-49fe-4c11-88fc-8ac14f171fea"
+							}
+						}
+					],
+					"id": "fe489a7a-cc9b-4e9a-b452-572eacff3c4b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "test.mersys.io"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "null_active_school=111111111111111111111111; g_state={\"i_p\":1699024311224,\"i_l\":2}; campus_loggedIn=true; campus_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODkzODIxOCwiaWF0IjoxNjk4OTM3OTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiI5SzFlZUtJd2VzX29DR0kxTEowRWdKWllPU2siLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.GELDkFrPVqO0CKxAo8XahKhkz1w1dmwnUJeqT2HZy41S_zREJoiIMccHip2Prl7EowmimQuKCZTIarnx3UJ1PeZFHvXa_Bd_i3DQNw_nKv-ijTmpYpE-IZRXjVetRBa5CSQmINxh8wuaWJ0t1zW8hOTL7ewCgCdpXJzK0TlsK44JAeLHmxmfDLiLA2pSkN0YPHT0ufvkV5LsWt1QoR_6Rp5QHylu0woMHvUyd4qpLBck6p3qW7sGKbh-POzwT1hKEv3uWA81w2t9exqs8DBY60gMkd81cpTiHnn7Jcv9dVLkbeT2rZV8tEj25tb34ayu61ma9GuzmNHB6hWXDe9x0g; login=true; 646cc2ef8bdae53ff2fee598_active_school=646cbb07acf2ee0d37c6d984; access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg5Mzg5ODYsImlhdCI6MTY5ODkzODY4NiwidXNlcl9uYW1lIjoidHVya2V5dHMiLCJqdGkiOiJIWVE0OHFRc2d4ejd4VmVGU1BUa2l5emd6Y00iLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwic2NvcGUiOlsib3BlbmlkIl19.QdkjU0fqvVCOSWs5V1_nTiAbA1pxJPS3qBCLyHknJj2myW_TJn1CobxMRrMCFXz4ri205frA3P3NC2-Ef7pfUq1RBvte_v_adqwtYL8Cx-6fePSr4BT9gHZhLLjC9fMFrdi-pIquV0eiOmNyi5wnrFl4YHvRQFzF8wnwqfJXH_02Tf-3riWOf-ciZVmLVPHCZd5MQNDioH_s8_vWPT-3mPBf8PTsQP3aLL_y0gdG9fVOmmYEusKSgEVv6WG8gS1LwF-EWTSLtQEQOeNmRTL9QycEPalXl7VCzayg246Koj2gEdgddgRq_YX_Cexzzs-08vpM-tyZOiDenwmC63FvrA; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0dXJrZXl0cyIsInNjb3BlIjpbIm9wZW5pZCJdLCJhdGkiOiJIWVE0OHFRc2d4ejd4VmVGU1BUa2l5emd6Y00iLCJleHAiOjE2OTk1NDM0ODYsImlhdCI6MTY5ODkzODY4NiwianRpIjoiVFJ0QWp2LVZqWUp2dVlpbHNTbXZxU3VXZEpBIiwiY2xpZW50X2lkIjoid2ViX2FwcCJ9.NyyA8EkX2PclrUGWC87fUlkV2SN-Cj2bmSDdzAmN26b-xCqpSterQ-ed8DlIvsixIvr6_Cr5MmmKGSQRaGFVL6sJK_2wsin7VQRlHSdUuHXbL8Qktk7Z2X0vyxm-c0Eoo2jN7Yce2x9DYGm6RpFqI-s0sqgRGP9Qaxy9QRje5Zz4-nW02FuqeZBmdZn8Okmpop8WRdH2W1pNoUgl483K3GTXTa9br5aJw18V7OMfO6h9PAw9aNPPTLcFlZFslGLHahpNzQNP2PYwlQxbW4oE61t1yH9NP2tH7lQFAvHC9Qtg1g-_gE6tMAWHoVhT2YwawGUZlpvZOih4cOic7nsRkw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"HR\"\r\n}"
+						},
+						"url": "https://test.mersys.io/school-service/api/position-category"
+					},
+					"response": []
+				},
+				{
+					"name": "ChangePositionCategoryName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Position Category name changed correctly\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"HR Position\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "186ceb82-f24f-4a1e-882c-d46d3431bd15"
+							}
+						}
+					],
+					"id": "fa269f79-f327-4c42-be0f-abe8c76335ec",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "null_active_school=111111111111111111111111; g_state={\"i_p\":1699024311224,\"i_l\":2}; campus_loggedIn=true; campus_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODkzODIxOCwiaWF0IjoxNjk4OTM3OTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiI5SzFlZUtJd2VzX29DR0kxTEowRWdKWllPU2siLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.GELDkFrPVqO0CKxAo8XahKhkz1w1dmwnUJeqT2HZy41S_zREJoiIMccHip2Prl7EowmimQuKCZTIarnx3UJ1PeZFHvXa_Bd_i3DQNw_nKv-ijTmpYpE-IZRXjVetRBa5CSQmINxh8wuaWJ0t1zW8hOTL7ewCgCdpXJzK0TlsK44JAeLHmxmfDLiLA2pSkN0YPHT0ufvkV5LsWt1QoR_6Rp5QHylu0woMHvUyd4qpLBck6p3qW7sGKbh-POzwT1hKEv3uWA81w2t9exqs8DBY60gMkd81cpTiHnn7Jcv9dVLkbeT2rZV8tEj25tb34ayu61ma9GuzmNHB6hWXDe9x0g; login=true; 646cc2ef8bdae53ff2fee598_active_school=646cbb07acf2ee0d37c6d984; access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg5Mzk2NjksImlhdCI6MTY5ODkzOTM2OSwidXNlcl9uYW1lIjoidHVya2V5dHMiLCJqdGkiOiJrMlRsZUR2cFJuT0tsbHpZWk9XN1Y3OWxKeFUiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwic2NvcGUiOlsib3BlbmlkIl19.LQLrkOZZQPMXnrEdcofEIMgeHgU5MPOXjRlM2MgtRlyfubOH6DSfpSlYK_xb8aQbg9XVNkrV5EfZ_gcJarkHOQ_fPfpKrUQfOABwVAPy2wJ0ftpT84oVlrhotP1ino-udIhKX3FlWSgkiBhnkWkiX8QCVnvEhAG1Ai_21J6hSQ7y9_h27m9Nulmcl8UQVY4iRRZgqvrc3t1o9xG_Z_wwR8zjLj2SVTPtTCxOczymamf52V-mjy9gmWwIoKLcbRoVKqAP6963vAjx3qBZ_r-KJ9mo7pdFRH6hzzfFN9JNc4ryfVjyofbdkXtGg1ebmEDtYeUQRSGvgHOt81PfsBS_4A; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0dXJrZXl0cyIsInNjb3BlIjpbIm9wZW5pZCJdLCJhdGkiOiJrMlRsZUR2cFJuT0tsbHpZWk9XN1Y3OWxKeFUiLCJleHAiOjE2OTk1NDQxNjksImlhdCI6MTY5ODkzOTM2OSwianRpIjoiaEt6dmxXbHRVWEpMVnkxal9URXlhNGJ3c2tnIiwiY2xpZW50X2lkIjoid2ViX2FwcCJ9.Wp-DSQXpQOz9S4QuLq00ULAh2ifXpOQQi0cssrVCw4OSj8CvOd4yTJdNrc4--tqjnDT7Ss0-MwyCy3BEfl5MTZ-3ej1Ugoxbz4fDBwJN9bgilyjYiJMRBekla3CKdF0zGZGQYiFd78uqmaps_WvLxk2-OONLPazUuj45iopSkqhhVpKSLWu8xigafLR_tjfKOvSzukSG0a5DjqvnMHE-IX8K9YmOkvoVgFhHs03dvqPO5tiT2Io_lamQAMaRIyfhZAyNn4oEZh6YwfKXUrjLDmYPVdUk88HEr81l90FSpUB4XWBFHcnp4_itp87QiUAEAAnQB73ramA61KGmAiHRPA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{positionCategoryId}}\",\r\n    \"name\": \"HR Position\"\r\n}"
+						},
+						"url": "https://test.mersys.io/school-service/api/position-category"
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePositionCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "a8f65918-4e08-44f5-9520-ca6fae3fe404"
+							}
+						}
+					],
+					"id": "3baeea22-98e7-49e1-abef-eac652e812f5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "null_active_school=111111111111111111111111; g_state={\"i_p\":1699024311224,\"i_l\":2}; campus_loggedIn=true; campus_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZENoYW5nZSI6ZmFsc2UsInVzZXJfbmFtZSI6InR1cmtleXRzIiwic2NvcGUiOlsib3BlbmlkIl0sImV4cCI6MTY5ODkzODIxOCwiaWF0IjoxNjk4OTM3OTE4LCJhdXRob3JpdGllcyI6WyJST0xFX0VWRVJZT05FIiwiUk9MRV9URUNITk9fVEVTVCJdLCJqdGkiOiI5SzFlZUtJd2VzX29DR0kxTEowRWdKWllPU2siLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwidXNlcm5hbWUiOiJ0dXJrZXl0cyJ9.GELDkFrPVqO0CKxAo8XahKhkz1w1dmwnUJeqT2HZy41S_zREJoiIMccHip2Prl7EowmimQuKCZTIarnx3UJ1PeZFHvXa_Bd_i3DQNw_nKv-ijTmpYpE-IZRXjVetRBa5CSQmINxh8wuaWJ0t1zW8hOTL7ewCgCdpXJzK0TlsK44JAeLHmxmfDLiLA2pSkN0YPHT0ufvkV5LsWt1QoR_6Rp5QHylu0woMHvUyd4qpLBck6p3qW7sGKbh-POzwT1hKEv3uWA81w2t9exqs8DBY60gMkd81cpTiHnn7Jcv9dVLkbeT2rZV8tEj25tb34ayu61ma9GuzmNHB6hWXDe9x0g; login=true; 646cc2ef8bdae53ff2fee598_active_school=646cbb07acf2ee0d37c6d984; access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg5Mzk2NjksImlhdCI6MTY5ODkzOTM2OSwidXNlcl9uYW1lIjoidHVya2V5dHMiLCJqdGkiOiJrMlRsZUR2cFJuT0tsbHpZWk9XN1Y3OWxKeFUiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIiwic2NvcGUiOlsib3BlbmlkIl19.LQLrkOZZQPMXnrEdcofEIMgeHgU5MPOXjRlM2MgtRlyfubOH6DSfpSlYK_xb8aQbg9XVNkrV5EfZ_gcJarkHOQ_fPfpKrUQfOABwVAPy2wJ0ftpT84oVlrhotP1ino-udIhKX3FlWSgkiBhnkWkiX8QCVnvEhAG1Ai_21J6hSQ7y9_h27m9Nulmcl8UQVY4iRRZgqvrc3t1o9xG_Z_wwR8zjLj2SVTPtTCxOczymamf52V-mjy9gmWwIoKLcbRoVKqAP6963vAjx3qBZ_r-KJ9mo7pdFRH6hzzfFN9JNc4ryfVjyofbdkXtGg1ebmEDtYeUQRSGvgHOt81PfsBS_4A; refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0dXJrZXl0cyIsInNjb3BlIjpbIm9wZW5pZCJdLCJhdGkiOiJrMlRsZUR2cFJuT0tsbHpZWk9XN1Y3OWxKeFUiLCJleHAiOjE2OTk1NDQxNjksImlhdCI6MTY5ODkzOTM2OSwianRpIjoiaEt6dmxXbHRVWEpMVnkxal9URXlhNGJ3c2tnIiwiY2xpZW50X2lkIjoid2ViX2FwcCJ9.Wp-DSQXpQOz9S4QuLq00ULAh2ifXpOQQi0cssrVCw4OSj8CvOd4yTJdNrc4--tqjnDT7Ss0-MwyCy3BEfl5MTZ-3ej1Ugoxbz4fDBwJN9bgilyjYiJMRBekla3CKdF0zGZGQYiFd78uqmaps_WvLxk2-OONLPazUuj45iopSkqhhVpKSLWu8xigafLR_tjfKOvSzukSG0a5DjqvnMHE-IX8K9YmOkvoVgFhHs03dvqPO5tiT2Io_lamQAMaRIyfhZAyNn4oEZh6YwfKXUrjLDmYPVdUk88HEr81l90FSpUB4XWBFHcnp4_itp87QiUAEAAnQB73ramA61KGmAiHRPA"
+							}
+						],
+						"url": "https://test.mersys.io/school-service/api/position-category/{{positionCategoryId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "2f00df59-ccb3-4142-aea0-fbbd3438e2fc",
+			"description": "#Yiğithan Düzgün"
 		}
 	],
 	"event": [
@@ -2675,6 +2608,10 @@
 			"key": "Discount_id",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"key": "positionCategoryId",
+			"value": ""
 		}
 	]
 }
