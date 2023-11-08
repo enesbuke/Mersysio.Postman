@@ -9,7 +9,6 @@
  * 🍪 _Sinem YURDUSEVER_ -- **Tester**
  * 🍪 _Fatih GÜVENÇ_ -- **Tester**
  * 🍪 _Burak Öztürk_ -- **Tester**
- * 🍪 _Yigithan Düzgün_ -- **Tester**
 
 
 ## Communication 📫
